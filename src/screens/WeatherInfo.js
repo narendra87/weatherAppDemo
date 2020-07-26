@@ -105,7 +105,7 @@ class WeatherInfo extends Component {
                 {this.state.errorMessage ? this.showSnackBar(this.state.errorMessage) : null}
                 {this.props.cityName ? <Text style={styles.heading}>{this.props.cityName}</Text> : null}
                 <SectionList
-                    style={{ marginBottom: 20 }}
+                    style={{ marginBottom: 20,flex:1 }}
                     sections={dataArray}
                     renderItem={({ item }) => {
                         return <View>

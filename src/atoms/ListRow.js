@@ -1,22 +1,31 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
-const ListRow = ({ item }) => {
-
+const ListRow = ({ item }) => { 
+    const weather = item.weather;
+    const weathetType = (weather) ? weather[0].main : null;
+    const wind = item.wind.speed;
     return (
         <View style={styles.viewCpontainer}>
-            <Text style={styles.textHeading}>Time: <Text style={styles.text}>{getTimeFromTemestamp(item.dt)}</Text></Text>
-            <Text style={styles.textHeading}>Tempture: <Text style={styles.text}>{item.main.temp} °C</Text></Text>
-            <Text style={styles.textHeading}>Min Tempture: <Text style={styles.text}>{item.main.temp_min}°C</Text></Text>
-            <Text style={styles.textHeading}>Max Tempture: <Text style={styles.text}>{item.main.temp_max}°C</Text></Text>
-            <Text style={styles.textHeading}>Humidity: <Text style={styles.text}>{item.main.humidity}%</Text></Text>
-            <Text style={styles.textHeading}>Pressure: <Text style={styles.text}>{item.main.pressure} hPa</Text></Text>
-
+            <View style={styles.viewLeft}>
+                <Text style={styles.textHeading}>Tempture: <Text style={styles.text}>{item.main.temp} °C</Text></Text>
+                <Text style={styles.textHeading}>Min Tempture: <Text style={styles.text}>{item.main.temp_min}°C</Text></Text>
+                <Text style={styles.textHeading}>Max Tempture: <Text style={styles.text}>{item.main.temp_max}°C</Text></Text>
+                <Text style={styles.textHeading}>Humidity: <Text style={styles.text}>{item.main.humidity}%</Text></Text>
+                <Text style={styles.textHeading}>Pressure: <Text style={styles.text}>{item.main.pressure} hPa</Text></Text>
+                <Text style={styles.textHeading}>Wind: <Text style={styles.text}>{wind} meter/sec</Text></Text>
+            </View>
+            <View style={styles.viewRight}>
+                <Text style={styles.weatherStyle}>{getTimeFromTemestamp(item.dt)}</Text>
+                <Text style={styles.weatherStyle}>{weathetType}</Text>
+            </View>
         </View>
     );
 };
 const styles = StyleSheet.create({
     viewCpontainer: {
+        flex: 3,
+        flexDirection: 'row',
         borderRadius: 5,
         backgroundColor: '#76c2f5',
         marginHorizontal: 15,
@@ -25,10 +34,25 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
 
     },
+    viewLeft: {
+        flex: 2,
+        flexDirection: 'column',
+    },
+    viewRight: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems:'center'
+    },
     textHeading: {
         fontSize: 18,
         marginTop: 10,
         marginStart: 15,
+    },
+    weatherStyle: {
+        fontSize: 20,
+        marginTop: 10,
+        fontWeight: 'bold',
+        color: '#0d3f61',
     },
     text: {
         fontSize: 14,

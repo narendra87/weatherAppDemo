@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextInput, View, Image, StyleSheet, Platform } from 'react-native'
+import { TextInput, View, Image, StyleSheet } from 'react-native'
 
 const SearchBar = ({ zipCode, onZipChange, onSubmit }) => {
     return (
@@ -11,7 +11,6 @@ const SearchBar = ({ zipCode, onZipChange, onSubmit }) => {
                 value={zipCode}
                 autoCapitalize='none'
                 autoCorrect={false}
-                keyboardType={Platform.OS === 'ios' ? "number-pad" : "numeric"}
                 maxLength={10}
                 onChangeText={newZipCode => onZipChange(newZipCode)}
                 onEndEditing={() => onSubmit()}
