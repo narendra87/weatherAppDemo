@@ -1,60 +1,56 @@
 import * as React from 'react'
 import { View, Button, Text, StyleSheet } from 'react-native'
-import { getWeatherData } from '../sagas/weatherSaga';
-import { useDispatch, useSelector } from "react-redux";
-import {GET_WEATHER} from '../utils/const'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 export default function HomeScreen({ navigation }) {
-    // const weatherRes = useSelector(state => state.weatherResponse);
-    // console.log("weather response: =====>>>>>",weatherRes.value)
-    const dispatch = useDispatch();
+
     return (
         <View style={styles.container}>
-            <View style={styles.buttonStyle}>
-                <Button
-                    title="Redux Example"
-                    onPress={() => {
-                        // dispatch({
-                        //                 type: GET_WEATHER,
-                        //                 value: "110096,IN",
-                        //               })
-                        navigation.navigate("Weather")
-                    }} />
+            <View style={{ flex: 4 }}>
+                <Text style={styles.txtStyle}>
+                    Welcome to weather forcast. You  can check here the forcost condition 
+                    for next five days by providing your area zip/postal code.
+                </Text>
             </View>
-           
+            <View style={{ flex: 1 }}>
+                <TouchableOpacity style={styles.buttonStyle}
+                    onPress={() => { navigation.navigate("Weather") }}
+                >
+                    <Text style={styles.buttonTxtStyle}>
+                        Check Weather
+                   </Text>
+                </TouchableOpacity>
+            </View>
+
+
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'stretch',
-        margin:20
+        flexDirection: 'column',
+        flex: 5,
+        backgroundColor: '#76c2f5',
     },
     buttonStyle: {
-        marginTop: 20
+        backgroundColor: '#0d3f61',
+        borderRadius: 10,
+        alignSelf: 'center',
+        width: '80%',
+    },
+    buttonTxtStyle: {
+        fontSize: 18,
+        color: '#b0eef7',
+        alignSelf: 'center',
+        padding: 10,
+    },
+    txtStyle: {
+        fontSize: 22,
+        color: '#0d3f61',
+        alignSelf: 'center',
+        padding: 10,
+        marginTop:100,
     }
 });
-// const mapStateToProps= (state)=>{
-
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-
-//     return {
-//         getWeatherData: (count) =>{
-//          return dispatch(getWeatherData(count))
-//       }
-
-//     // // Action
-//     // return {
-      
-//     //   getWeatherData: () => dispatch({
-//     //     type: 'DECREASE_COUNTER',
-//     //     value: "110096,IN",
-//     //   }),
-//     // };
-// }
-// }

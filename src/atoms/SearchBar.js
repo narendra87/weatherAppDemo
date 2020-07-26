@@ -1,7 +1,7 @@
 import React from 'react'
-import { TextInput, View, Image,StyleSheet } from 'react-native'
+import { TextInput, View, Image, StyleSheet, Platform } from 'react-native'
 
-const SearchBar = ({zipCode, onZipChange,onSubmit}) => {
+const SearchBar = ({ zipCode, onZipChange, onSubmit }) => {
     return (
         <View style={styles.viewCpontainer}>
             <Image source={require('../assets/search.png')}
@@ -11,9 +11,10 @@ const SearchBar = ({zipCode, onZipChange,onSubmit}) => {
                 value={zipCode}
                 autoCapitalize='none'
                 autoCorrect={false}
-                maxLength={10}  
-                onChangeText={newZipCode=>onZipChange(newZipCode)}
-                onEndEditing={()=>onSubmit()}
+                keyboardType={Platform.OS === 'ios' ? "number-pad" : "numeric"}
+                maxLength={10}
+                onChangeText={newZipCode => onZipChange(newZipCode)}
+                onEndEditing={() => onSubmit()}
             ></TextInput>
 
         </View>
@@ -22,9 +23,9 @@ const SearchBar = ({zipCode, onZipChange,onSubmit}) => {
 const styles = StyleSheet.create({
     viewCpontainer: {
         borderRadius: 5,
-        backgroundColor: '#e5e5e5',
+        backgroundColor: '#76c2f5',
         marginHorizontal: 15,
-        marginVertical: 15,
+        marginTop: 15,
         flexDirection: 'row',
         height: 50,
     },
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         width: 25,
-        height:25,
+        height: 25,
         alignSelf: 'center',
         marginStart: 15,
     }

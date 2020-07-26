@@ -1,44 +1,53 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
-const ListRow = ({item}) => {
+const ListRow = ({ item }) => {
+
     return (
         <View style={styles.viewCpontainer}>
-            <Text style={styles.text}>Date: {item.dt_txt}</Text>
-            <Text style={styles.text}>Tempture: {item.main.temp} °C</Text>
-            <Text style={styles.text}>Min Tempture: {item.main.temp_min}°C</Text>
-            <Text style={styles.text}>Max Tempture: {item.main.temp_max}°C</Text>
-            <Text style={styles.text}>Humidity: {item.main.humidity}%</Text>
-            <Text style={styles.text}>Pressure: {item.main.pressure}hPa</Text>
-            
+            <Text style={styles.textHeading}>Time: <Text style={styles.text}>{getTimeFromTemestamp(item.dt)}</Text></Text>
+            <Text style={styles.textHeading}>Tempture: <Text style={styles.text}>{item.main.temp} °C</Text></Text>
+            <Text style={styles.textHeading}>Min Tempture: <Text style={styles.text}>{item.main.temp_min}°C</Text></Text>
+            <Text style={styles.textHeading}>Max Tempture: <Text style={styles.text}>{item.main.temp_max}°C</Text></Text>
+            <Text style={styles.textHeading}>Humidity: <Text style={styles.text}>{item.main.humidity}%</Text></Text>
+            <Text style={styles.textHeading}>Pressure: <Text style={styles.text}>{item.main.pressure} hPa</Text></Text>
+
         </View>
     );
 };
 const styles = StyleSheet.create({
     viewCpontainer: {
         borderRadius: 5,
-        backgroundColor: '#e5e5e5',
+        backgroundColor: '#76c2f5',
         marginHorizontal: 15,
-        marginVertical: 5,
-        paddingTop:10,
-        paddingBottom:10,
-        
+        marginTop: 10,
+        paddingTop: 10,
+        paddingBottom: 10,
+
+    },
+    textHeading: {
+        fontSize: 18,
+        marginTop: 10,
+        marginStart: 15,
     },
     text: {
-        fontSize: 18,
-        marginTop:10,
-        marginStart: 15,
+        fontSize: 14,
+        marginTop: 10,
     },
-    bigtext: {
-        fontSize: 20,
-        marginTop:10,
-        marginStart: 15,
-    },
-    icon: {
-        fontSize: 25,
-        alignSelf: 'center',
-        marginStart: 15,
-    }
 
 });
+
+getTimeFromTemestamp = (timestamp) => {
+    var a = new Date(timestamp * 1000);
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var time;
+    if (hour > 12) {
+        time = hour - 12 + ':' + min + " " + "PM";
+    } else {
+        time = hour + ':' + min + " " + "AM";
+    }
+
+    return time;
+}
 export default ListRow;
